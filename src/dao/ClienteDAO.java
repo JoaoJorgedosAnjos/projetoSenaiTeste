@@ -6,6 +6,7 @@ package dao;
 import connection.Conexao;
 import model.ClienteModel;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,7 @@ public class ClienteDAO {
         try{
             String sql = "insert into cliente (cod, nome, email, cep, bairro, rg, celular, cidade, complemento, cpf, telefone, uf)"+
             "values ( ?,?,?,?,?,?,?,?,?,?,?,?)";
-        try(PreparedStatement stmt = con.prepareStatement(sql)){
+        PreparedStatement stmt = con.prepareStatement(sql);
             
             stmt.setInt(1, obj.getCod());
             stmt.setString(2, obj.getNome());
@@ -37,11 +38,14 @@ public class ClienteDAO {
             stmt.setString(10, obj.getCpf());
             stmt.setString(11, obj.getTelefone());
             stmt.setString(12, obj.getUf());
-            stmt.executeUpdate();
-            }
+            stmt.execute();
+            stmt.close();
             
-        }catch(Exception e){
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Cadastrado com sucesso" );
+            
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"error:"+ e);
         }
     }
     // public void atualizarCliente(){

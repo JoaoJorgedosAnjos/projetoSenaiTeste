@@ -4,6 +4,12 @@
  */
 package view;
 
+import dao.ClienteDAO;
+import javax.swing.JOptionPane;
+import model.ClienteModel;
+import java.sql.SQLException;
+
+
 /**
  *
  * @author Professor
@@ -377,12 +383,29 @@ public class cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCidadeActionPerformed
 
-    private void jTextFieldUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUfActionPerformed
-
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-        // TODO add your handling code here:
+         try{
+             ClienteModel obj = new ClienteModel();
+             obj.setCod(Integer.parseInt(jTextFieldCod.getText()));
+             obj.setNome(jTextFieldNome.getText());
+             obj.setEmail(jTextFieldEmail.getText());
+             obj.setCep(jFormattedTextFieldCep.getText());
+             obj.setBairro(jTextFieldBairro.getText());
+             obj.setRg(jFormattedTextFieldCep.getText());
+             obj.setCelular(jFormattedTextFieldCelular.getText());
+             obj.setCidade(jTextFieldCidade.getText());
+             obj.setComplemento(jTextFieldComplemento.getText());
+             obj.setCpf(jFormattedTextFieldCpf.getText());
+             obj.setTelefone(jFormattedTextFieldTelefone.getText());
+             obj.setUf(jTextFieldUf.getText());
+             
+             ClienteDAO dao = new ClienteDAO();
+             dao.cadastrarCliente(obj);
+             
+         }catch (SQLException ex){
+             JOptionPane.showMessageDialog(null, "Erro"+ ex);
+             
+         }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jTextFieldBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBairroActionPerformed
@@ -408,6 +431,10 @@ public class cadastro extends javax.swing.JFrame {
     private void jFormattedTextFieldTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldTelefoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldTelefoneActionPerformed
+
+    private void jTextFieldUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldUfActionPerformed
 
     /**
      * @param args the command line arguments
